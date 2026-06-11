@@ -1,0 +1,87 @@
+<div class="min-h-[calc(100vh-8rem)] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex items-center justify-center px-4">
+  <div class="max-w-md w-full bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 p-8 rounded-2xl shadow-xs">
+    
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+        {{ langService.translate('login.title') }}
+      </h2>
+      <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 font-medium">
+        {{ langService.translate('login.subtitle') }}
+      </p>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="mb-4 p-3 bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900 text-red-600 dark:text-red-400 rounded-xl text-sm font-medium">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+      
+      <div>
+        <label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">
+          {{ langService.translate('login.emailLabel') }}
+        </label>
+        <input 
+          type="email" 
+          formControlName="email"
+          [placeholder]="langService.translate('login.emailPlaceholder')"
+          class="w-full px-4 py-3 rounded-xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-400 transition-all text-base"
+        />
+        @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+          <span class="text-xs font-semibold text-red-500 mt-1 block">
+            {{ langService.translate('login.errorEmail') }}
+          </span>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1.5 text-slate-700 dark:text-slate-300">
+          {{ langService.translate('login.passwordLabel') }}
+        </label>
+        <input 
+          type="password" 
+          formControlName="password"
+          placeholder="••••••••"
+          class="w-full px-4 py-3 rounded-xl border bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 focus:outline-hidden focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-400 transition-all text-base"
+        />
+        @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+          <span class="text-xs font-semibold text-red-500 mt-1 block">
+            {{ langService.translate('login.errorPassword') }}
+          </span>
+        }
+      </div>
+
+      <button 
+        type="submit" 
+        [disabled]="isLoading()"
+        class="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-600/50 text-white font-semibold rounded-xl transition-colors shadow-md shadow-indigo-600/10 flex justify-center items-center cursor-pointer text-base"
+      >
+        @if (isLoading()) {
+          <svg class="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+        } @else {
+          {{ langService.translate('login.submitCta') }}
+        }
+      </button>
+
+    </form>
+
+    <div class="mt-6 pt-5 border-t border-slate-200/60 dark:border-slate-700/40 text-center">
+      <p class="text-xs text-slate-400 dark:text-slate-500 leading-relaxed font-medium">
+        {{ langService.translate('login.demoCredentialsPrefix') }}
+        <a 
+          href="https://democredentials.ahmetmahirdemirelli.com" 
+          target="_blank" 
+          class="text-indigo-500 dark:text-indigo-400 hover:text-indigo-600 dark:hover:text-indigo-300 font-semibold underline underline-offset-4 transition-colors"
+        >
+          democredentials.ahmetmahirdemirelli.com
+        </a> 
+        {{ langService.translate('login.demoCredentialsSuffix') }}
+      </p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="min-h-[calc(100vh-8rem)] bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex items-center">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+    
+    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-none mb-6">
+      HomeSync
+    </h1>
+
+    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 font-medium">
+      {{ langService.translate('home.subtitle') }}
+    </p>
+    
+    <button 
+        type="button"
+        (click)="navigateToLogin()"
+        class="w-full sm:w-auto px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition-colors shadow-md shadow-indigo-600/10 cursor-pointer whitespace-nowrap"
+      >
+        {{ langService.translate('home.sw') }}
+      </button>
+  </div>
+</div>

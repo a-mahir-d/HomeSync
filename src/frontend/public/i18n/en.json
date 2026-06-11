@@ -1,0 +1,40 @@
+{
+  "navbar": {
+    "login": "Login",
+    "logout": "Logout",
+    "dashboard": "Dashboard"
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "home": {
+    "subtitle": "Monitor your home’s status and the system’s performance in milliseconds.",
+    "sw": "Start Watching"
+  },
+  "login": {
+    "title": "Welcome Back",
+    "subtitle": "Enter your credentials to access your account",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "name@homesync.com",
+    "passwordLabel": "Password",
+    "submitCta": "Sign In",
+    "errorEmail": "Please enter a valid email address.",
+    "errorPassword": "Password is required (min 6 characters).",
+    "errorInvalid": "Invalid email or password combination.",
+    "demoCredentialsPrefix": "If you do not have login credentials, you can obtain them from",
+    "demoCredentialsSuffix": ""
+  },
+  "dashboard": {
+    "title": "HomeSync Dashboard",
+    "subtitle": "Monitor sensor movements in milliseconds, live and uninterrupted.",
+    "statusLabel": "Simulator Status",
+    "btnStart": "Start Simulation",
+    "btnStop": "Stop Simulation",
+    "statusNormal": "Normal",
+    "statusKritik": "Critical",
+    "sensorIdPrefix": "ID: #",
+    "minLabel": "Min",
+    "maxLabel": "Max",
+    "loadingMessage": "Loading sensor list or no active devices found..."
+  }
+}

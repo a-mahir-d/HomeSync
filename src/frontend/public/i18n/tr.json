@@ -1,0 +1,40 @@
+{
+  "navbar": {
+    "login": "Giriş Yap",
+    "logout": "Çıkış Yap",
+    "dashboard": "Panel"
+  },
+  "footer": {
+    "copyright": "Tüm hakları saklıdır."
+  },
+  "home": {
+    "subtitle": "Evinizin nabzını, sistemin hızını milisaniyeler içinde izleyin.",
+    "sw": "İzlemeye Başla"
+  },
+  "login": {
+    "title": "Tekrar Hoş Geldiniz",
+    "subtitle": "Hesabınıza erişmek için bilgilerinizi girin",
+    "emailLabel": "E-posta Adresi",
+    "emailPlaceholder": "isim@homesync.com",
+    "passwordLabel": "Şifre",
+    "submitCta": "Giriş Yap",
+    "errorEmail": "Lütfen geçerli bir e-posta adresi girin.",
+    "errorPassword": "Şifre alanı zorunludur (en az 6 karakter).",
+    "errorInvalid": "E-posta veya şifre hatalı.",
+    "demoCredentialsPrefix": "Giriş bilgilerine sahip değilseniz",
+    "demoCredentialsSuffix": "adresinden temin edebilirsiniz."
+  },
+  "dashboard": {
+    "title": "HomeSync Kontrol Paneli",
+    "subtitle": "Sensör hareketlerini milisaniyeler içinde, canlı ve kesintisiz izleyin.",
+    "statusLabel": "Simülatör Durumu",
+    "btnStart": "Simülasyonu Başlat",
+    "btnStop": "Simülasyonu Durdur",
+    "statusNormal": "Normal",
+    "statusKritik": "Kritik",
+    "sensorIdPrefix": "ID: #",
+    "minLabel": "Min",
+    "maxLabel": "Max",
+    "loadingMessage": "Sensör listesi yükleniyor veya aktif cihaz bulunamadı..."
+  }
+}
