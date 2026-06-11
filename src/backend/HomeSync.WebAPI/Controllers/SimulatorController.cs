@@ -20,7 +20,7 @@ public class SimulatorController(SensorDataSimulatorWorker simulator) : Controll
     public IActionResult GetStatus()
     {
         var status = simulator.GetStatus();
-        return Ok(new { Status = status });
+        return Ok(status);
     }
 
     [HttpPost("start")]
