@@ -27,6 +27,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<SensorDataConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
+        cfg.SetLicense("community");
         var rabbitUrl = rabbitMQSettings.ConnectionString;
         cfg.Host(new Uri(rabbitUrl));
 
