@@ -6,5 +6,4 @@ public class Item
     public required string Name { get; set; }
     public int MinDegree { get; set; }
     public int MaxDegree { get; set; }
-    public int CurrentDegree { get; set; }
 }

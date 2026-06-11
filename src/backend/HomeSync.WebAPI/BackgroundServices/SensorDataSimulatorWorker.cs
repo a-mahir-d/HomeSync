@@ -5,7 +5,13 @@ namespace HomeSync.WebAPI.BackgroundServices;
 
 public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger, IServiceProvider serviceProvider) : BackgroundService
 {
-    private List<Item> _items = GetDefaultItemsList();
+    private readonly List<Item> _items =
+    [
+        new Item { Id = 1, Name = "Basement Freezer", MinDegree = -30, MaxDegree = -10 },
+        new Item { Id = 2, Name = "Bedroom", MinDegree = 18, MaxDegree = 22 },
+        new Item { Id = 3, Name = "Living Room", MinDegree = 20, MaxDegree = 24 },
+        new Item { Id = 4, Name = "Kitchen Freezer", MinDegree = -18, MaxDegree = -4 }
+    ];
     private bool _isSimulatorRunning = false;
     private readonly Lock _lock = new();
 
@@ -23,7 +29,6 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
         lock (_lock)
         {
             _isSimulatorRunning = false;
-            _items = GetDefaultItemsList();
             logger.LogInformation("Simülasyon durduruldu ve veriler sıfırlandı.");
         }
     }
@@ -34,6 +39,11 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
         {
             return _isSimulatorRunning;
         }
+    }
+
+    public List<Item> GetItems()
+    {
+        return _items;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -75,11 +85,12 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
         foreach (var item in _items)
         {
             bool isHardwareFault = false;
+            int newDegree;
             if (item.Id == problemedItemId)
             {
                 if (Random.Shared.Next(0, 100) < 10)
                 {
-                    item.CurrentDegree = 999;
+                    newDegree = 999;
                     isHardwareFault = true;
                     logger.LogCritical($"[SIMÜLATÖR] {item.Name} için DONANIMSAL ARIZA (%10 Olasılık) tetiklendi! Değer: 999°C");
                 }
@@ -88,40 +99,29 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
                     bool goBelow = Random.Shared.Next(0, 2) == 0;
                     if (goBelow)
                     {
-                        item.CurrentDegree = Random.Shared.Next(item.MinDegree - 10, item.MinDegree);
+                        newDegree = Random.Shared.Next(item.MinDegree - 10, item.MinDegree);
                     }
                     else
                     {
-                        item.CurrentDegree = Random.Shared.Next(item.MaxDegree + 1, item.MaxDegree + 11);
+                        newDegree = Random.Shared.Next(item.MaxDegree + 1, item.MaxDegree + 11);
                     }
                 }
             }
             else
             {
-                item.CurrentDegree = Random.Shared.Next(item.MinDegree, item.MaxDegree + 1);
+                newDegree = Random.Shared.Next(item.MinDegree, item.MaxDegree + 1);
             }
 
-            bool isAlarm = item.CurrentDegree < item.MinDegree || item.CurrentDegree > item.MaxDegree;
+            bool isAlarm = newDegree < item.MinDegree || newDegree > item.MaxDegree;
             await publishEndpoint.Publish(new SensorReadEvent
             {
                 Id = item.Id,
-                Name = item.Name,
-                Value = item.CurrentDegree,
+                Value = newDegree,
                 IsAlarm = isAlarm || isHardwareFault,
                 Timestamp = DateTime.UtcNow
             });
 
-            logger.LogInformation($"Kuyruğa gönderildi -> {item.Name}: {item.CurrentDegree}°C");
+            logger.LogInformation($"Kuyruğa gönderildi -> {item.Name}: {newDegree}°C");
         }
-    }
-
-    private static List<Item> GetDefaultItemsList()
-    {
-        return [
-            new Item { Id = 1, Name = "Basement Freezer", MinDegree = -30, MaxDegree = -10, CurrentDegree = -20 },
-            new Item { Id = 2, Name = "Bedroom", MinDegree = 18, MaxDegree = 22, CurrentDegree = 21 },
-            new Item { Id = 3, Name = "Living Room", MinDegree = 20, MaxDegree = 24, CurrentDegree = 22 }, // Min/Max aynıydı düzelttim
-            new Item { Id = 4, Name = "Kitchen Freezer", MinDegree = -18, MaxDegree = -4, CurrentDegree = -12 } // ID'yi 4 yaptım
-        ];
     }
 }

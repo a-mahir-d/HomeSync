@@ -9,6 +9,13 @@ namespace HomeSync.WebAPI.Controllers;
 [Authorize]
 public class SimulatorController(SensorDataSimulatorWorker simulator) : ControllerBase
 {
+    [HttpGet("items")]
+    public IActionResult GetItems()
+    {
+        var data = simulator.GetItems();
+        return Ok(data);
+    }
+
     [HttpGet("status")]
     public IActionResult GetStatus()
     {
