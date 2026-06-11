@@ -1,0 +1,86 @@
+# ==========================================
+# 1. İşletim Sistemi ve Genel Dosyalar
+# ==========================================
+.DS_Store
+Thumbs.db
+db.lock
+*.lnk
+.pnp.*
+.yarn/
+
+# ==========================================
+# 2. .NET (C# / Visual Studio) Kalıntıları
+# ==========================================
+# Derleme çıktıları ve geçici dosyalar
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Xx]64/
+[Xx]86/
+bbin/
+bin/
+obj/
+/build/
+
+# Kullanıcıya özel VS ayarları
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+MemoryDumps/
+
+# Diğer .NET derleme dosyaları
+*.ilk
+*.pdb
+*.iobj
+*.ipdb
+*.log
+*.tmp
+
+# ==========================================
+# 3. Angular (Node / Frontend) Kalıntıları
+# ==========================================
+# Bağımlılıklar (Kesinlikle repoya girmemeli)
+node_modules/
+/jspm_packages/
+
+# Angular build ve cache çıktıları
+/dist/
+/.angular/
+/.tmp/
+/.sass-cache/
+connect.lock
+coverage/
+libjs/
+
+# Log dosyaları
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+eslintdebug.log*
+
+# ==========================================
+# 4. Editör ve IDE Ayarları (VS Code / Rider)
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.targets
+
+# ==========================================
+# 5. Güvenlik ve Local Config (Opsiyonel)
+# ==========================================
+# Localde kalması gereken, şifre/bağlantı içeren dosyalar
+appsettings.Development.json
+appsettings.local.json
+secrets.json
+.env
+.env.local
