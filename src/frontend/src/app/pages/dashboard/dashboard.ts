@@ -71,12 +71,23 @@ export class Dashboard implements OnInit, OnDestroy {
         this.updateItemInList(event);
       });
 
-    // 2. Alarm Akışı Dinleyicisi
     this.sensorDataService.sensorAlarm$
       .pipe(takeUntil(this.destroy$))
       .subscribe((event: SensorReadEvent) => {
         this.updateItemInList(event);
       });
+
+    this.sensorDataService.hardwareError$
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((rawMessage: string) => {
+      if (rawMessage.startsWith('SENSOR_ERROR_ON_')) {
+        const sensorId = rawMessage.replace('SENSOR_ERROR_ON_', '');
+        const translationPattern = this.langService.translate('dashboard.hardwareErrorPattern');
+        const formattedMessage = translationPattern.replace('{id}', sensorId);
+        this.hardwareError.set(formattedMessage);
+        setTimeout(() => this.hardwareError.set(null), 3000);
+      }
+    });
   }
 
   private updateItemInList(event: SensorReadEvent): void {
@@ -85,7 +96,7 @@ export class Dashboard implements OnInit, OnDestroy {
         if (item.id === event.id) {
           return {
             ...item,
-            currentDegree: event.value,
+            currentDegree: event.value === 999 ? 0 : event.value,
             isAlarm: event.isAlarm
           };
         }

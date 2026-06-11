@@ -35,6 +35,7 @@
     "sensorIdPrefix": "ID: #",
     "minLabel": "Min",
     "maxLabel": "Max",
-    "loadingMessage": "Sensör listesi yükleniyor veya aktif cihaz bulunamadı..."
+    "loadingMessage": "Sensör listesi yükleniyor veya aktif cihaz bulunamadı...",
+    "hardwareErrorPattern": "Sensör {id} üzerinde kritik donanım hatası tespit edildi!"
   }
 }
