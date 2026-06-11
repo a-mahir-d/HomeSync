@@ -97,7 +97,7 @@ export class Dashboard implements OnInit, OnDestroy {
   toggleSimulator(): void {
     this.isLoading.set(true);
     const action = this.isSimulatorRunning() 
-      ? this.sensorDataService.startSimulator() 
+      ? this.sensorDataService.stopSimulator() 
       : this.sensorDataService.startSimulator();
 
     action.pipe(takeUntil(this.destroy$)).subscribe({
