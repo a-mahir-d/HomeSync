@@ -20,6 +20,7 @@ builder.Services.AddOptions<DemoUserSettings>().BindConfiguration("DemoUser").Va
 builder.Services.AddOptions<JwtSettings>().BindConfiguration("Jwt").ValidateDataAnnotations().ValidateOnStart();
 builder.Services.AddOptions<RabbitMQSettings>().BindConfiguration("RabbitMQ").ValidateDataAnnotations().ValidateOnStart();
 
+Environment.SetEnvironmentVariable("MT_LICENSE", "open-source");
 builder.Services.AddMassTransit(x =>
 {
     var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQ").Get<RabbitMQSettings>() ?? throw new InvalidOperationException("RabbitMQSettings configuration is missing.");
