@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace HomeSync.WebAPI.Consumers;
 
-public class SensorDataConsumer(ILogger<SensorDataConsumer> logger, IHubContext<SensorHub> hubContext) : IConsumer<SensorReadEvent>
+public class SensorDataConsumer(IHubContext<SensorHub> hubContext) : IConsumer<SensorReadEvent>
 {
     public async Task Consume(ConsumeContext<SensorReadEvent> context)
     {
