@@ -23,6 +23,9 @@ export class SensorDataService {
   private readonly sensorAlarmSource = new Subject<SensorReadEvent>();
   sensorAlarm$ = this.sensorAlarmSource.asObservable();
 
+  private readonly hardwareErrorSource = new Subject<string>();
+  hardwareError$ = this.hardwareErrorSource.asObservable();
+
   startSignalRConnection(): void {
     if (this.hubConnection?.state === HubConnectionState.Connected) return;
 
@@ -43,6 +46,10 @@ export class SensorDataService {
 
     this.hubConnection.on('ReceiveSensorAlarm', (event: SensorReadEvent) => {
       this.sensorAlarmSource.next(event);
+    });
+
+    this.hubConnection.on('ReceiveHardwareError', (rawMessage: string) => {
+      this.hardwareErrorSource.next(rawMessage);
     });
   }
 

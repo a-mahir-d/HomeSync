@@ -35,6 +35,7 @@
     "sensorIdPrefix": "ID: #",
     "minLabel": "Min",
     "maxLabel": "Max",
-    "loadingMessage": "Loading sensor list or no active devices found..."
+    "loadingMessage": "Loading sensor list or no active devices found...",
+    "hardwareErrorPattern": "Critical hardware error detected on Sensor {id}!"
   }
 }
