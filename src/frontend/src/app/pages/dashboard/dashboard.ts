@@ -91,14 +91,12 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   private updateItemInList(event: SensorReadEvent): void {
-    const displayValue = event.value === 999 ? 0 : event.value;
-    
     this.items.update(currentItems => 
       currentItems.map(item => {
         if (item.id === event.id) {
           return {
             ...item,
-            currentDegree: event.value,
+            currentDegree: event.value === 999 ? 0 : event.value,
             isAlarm: event.isAlarm
           };
         }
