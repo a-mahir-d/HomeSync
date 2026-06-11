@@ -25,7 +25,7 @@ public class ExceptionHandlingMiddleware(RequestDelegate next)
     private static async Task HandleExceptionAsync(HttpContext context)
     {
         HttpStatusCode status = HttpStatusCode.InternalServerError;
-        var messag = "Beklenmeyen bir hata oluştu.";
+        var message = "Beklenmeyen bir hata oluştu.";
 
         context.Response.ContentType = "text/plain; charset=utf-8";
         context.Response.StatusCode = (int)status;
