@@ -25,7 +25,7 @@ public sealed class SensorHub(SensorDataSimulatorWorker simulator) : Hub<ISensor
         if (_activeConnections <= 0)
         {
             _activeConnections = 0;
-            await simulator.StopAsync(CancellationToken.None);
+            simulator.StopSimulator();
             Console.WriteLine("[SignalR Auto-Stop] No active clients left. Simulator auto-stopped to save Neon/Render resources.");
         }
 
