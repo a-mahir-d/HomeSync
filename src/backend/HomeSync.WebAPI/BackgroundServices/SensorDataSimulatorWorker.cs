@@ -29,7 +29,7 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
         lock (_lock)
         {
             _isSimulatorRunning = false;
-            logger.LogInformation("Simülasyon durduruldu ve veriler sıfırlandı.");
+            logger.LogInformation("Simülasyon durduruldu.");
         }
     }
 
@@ -120,8 +120,6 @@ public class SensorDataSimulatorWorker(ILogger<SensorDataSimulatorWorker> logger
                 IsAlarm = isAlarm || isHardwareFault,
                 Timestamp = DateTime.UtcNow
             });
-
-            logger.LogInformation($"Kuyruğa gönderildi -> {item.Name}: {newDegree}°C");
         }
     }
 }

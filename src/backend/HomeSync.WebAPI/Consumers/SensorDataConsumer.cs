@@ -12,7 +12,6 @@ public class SensorDataConsumer(ILogger<SensorDataConsumer> logger, IHubContext<
         var message = context.Message;
         if (message.IsAlarm)
         {
-            logger.LogWarning($"[ALARM] {message.Id} kritik seviyede! Değer: {message.Value}°C | Zaman: {message.Timestamp}");
             if (message.Value == 999)
             {
                 throw new InvalidOperationException("HARDWARE_ERROR");
@@ -22,7 +21,6 @@ public class SensorDataConsumer(ILogger<SensorDataConsumer> logger, IHubContext<
         }
         else
         {
-            logger.LogInformation($"[NORMAL] {message.Id}: {message.Value}°C");
             await hubContext.Clients.All.SendAsync("ReceiveSensorData", message);
         }
     }
