@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace HomeSync.WebAPI.Consumers;
 
-public class SensorDataConsumer(IHubContext<SensorHub> hubContext) : IConsumer<SensorReadEvent>
+public class SensorDataConsumer(ILogger<SensorDataConsumer> logger, IHubContext<SensorHub> hubContext) : IConsumer<SensorReadEvent>
 {
     public async Task Consume(ConsumeContext<SensorReadEvent> context)
     {
@@ -14,7 +14,8 @@ public class SensorDataConsumer(IHubContext<SensorHub> hubContext) : IConsumer<S
         {
             if (message.Value == 999)
             {
-                throw new InvalidOperationException("HARDWARE_ERROR");
+                logger.LogCritical($"[HARDWARE] Kritik donanımsal sensör arızası! Sensör ID: {message.Id}");
+                await hubContext.Clients.All.SendAsync("ReceiveHardwareError", $"SENSOR_ERROR_ON_{message.Id}");
             }
 
             await hubContext.Clients.All.SendAsync("ReceiveSensorAlarm", message);
