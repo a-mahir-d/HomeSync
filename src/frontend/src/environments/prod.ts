@@ -1,3 +1,3 @@
 export const prod = {
-  serverUrl: 'https://homesync-jaqe.onrender.com'
+  serverUrl: 'https://homesync-pm41.onrender.com'
 };
