@@ -19,7 +19,7 @@
 * **Tailwind CSS v4:** Koyu/açık tema uyumlu, modern ve minimal endüstriyel panel tasarımı.
 * **RxJS Streams:** Güvenli abonelik yönetimi (`takeUntil`, `Subject`) ile asenkron SignalR event dinleyicileri.
 
-### 🇬🇧 English
+### English
 ### Backend (.NET 10)
 * **MassTransit & RabbitMQ (CloudAMQP):** Reliable, asynchronous, and loosely coupled message broker management for distributed event-driven architecture.
 * **SignalR Hub:** Token-authenticated WebSocket infrastructure broadcasting live telemetry data and critical hardware faults from the Consumer layer to clients.
@@ -40,7 +40,7 @@
 * **Hata Maskeleme (Fail-Safe) & İstemci Tabanlı Dil Yönetimi:** Arka planda %10 olasılıkla oluşan donanım arızalarında backend sadece ham bir kod (`SENSOR_ERROR_ON_X`) fırlatır. Ön yüz bu kodu yakalayarak kullanıcının tarayıcı diline (TR/ENG) göre dinamik bir uyarı kutusuna dönüştürür ve sistem kararlılığı için arızalı sensörün derecesini geçici olarak `0°C` şeklinde maskeler.
 * **Kaynak Optimizasyonu (Auto-Stop):** Render, Neon ve CloudAMQP (Free Tier) kotalarını korumak amacıyla, SignalR Hub'ında aktif hiçbir istemci kalmadığı an arka plan simülatör döngüsü thread güvenli (`Lock`) olarak otomatik askıya alınır.
 
-### 🇬🇧 English
+### English
 * **Distributed Data Pipeline:** Background Worker generates telemetry data $\rightarrow$ Publishes it to RabbitMQ on CloudAMQP via MassTransit $\rightarrow$ `SensorDataConsumer` consumes the message asynchronously $\rightarrow$ Broadcasts payload to clients using conditional SignalR events based on item states.
 * **Fail-Safe Masking & Client-Side Localization:** When a hardware fault occurs (10% probability), the backend pushes a raw identifier (`SENSOR_ERROR_ON_X`). The frontend captures this code, localizes the error message based on active language settings (TR/ENG), and temporarily masks the damaged sensor's degree as `0°C` to provide a clean UX.
 * **Resource Optimization (Auto-Stop):** To prevent exceeding Render, Neon, and CloudAMQP free-tier limits, the background simulator tracking loop is safely suspended using thread synchronization (`Lock`) as soon as the last client disconnects from the SignalR Hub.
